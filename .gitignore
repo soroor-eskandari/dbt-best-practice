@@ -1,3 +1,13 @@
+# dbt project
+target/
+dbt_packages/
+logs/
+.venv/
+.env
+.user.yml
+__pycache__/
+
+# local / legacy exclusions from remote repo
 .htaccess
 css.php
 rpc/

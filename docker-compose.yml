@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: dbt_best_practice_postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-dbt}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dbt}
+      POSTGRES_DB: ${POSTGRES_DB:-dbt_best_practice}
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:
